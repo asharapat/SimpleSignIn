@@ -24,6 +24,13 @@ tools:context="com.example.seydazimovnurbol.registerfirebase.MenuActivity">
         tools:text="13.5s"
         android:layout_margin="8dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tryNumber"
+        android:text="0"
+        android:layout_margin="8dp"/>
+
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="match_parent"
