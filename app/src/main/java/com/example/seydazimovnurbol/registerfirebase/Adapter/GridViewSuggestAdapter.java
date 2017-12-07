@@ -27,7 +27,8 @@ public class GridViewSuggestAdapter extends BaseAdapter {
     private List<String> suggestSource;
     private Context context;
     private PlayActivity playActivity;
-
+    public String s = "";
+    public static  int j = 0;
 
 
     public GridViewSuggestAdapter(List<String> suggestSource, Context context, PlayActivity playActivity) {
@@ -90,9 +91,9 @@ public class GridViewSuggestAdapter extends BaseAdapter {
                             GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.user_submit_answer,context);
                             playActivity.gridViewAnswer.setAdapter(answerAdapter);
                             answerAdapter.notifyDataSetChanged();
-                            int count = help.sharedD.getHelp();
-                            help.sharedD.setHelp(++count);
-                            ((PlayActivity) context).getHelp();
+//                            int count = help.sharedD.getHelp();
+//                            help.sharedD.setHelp(++count);
+//                            ((PlayActivity) context).getHelp();
                             // Remove from suggest source
                             playActivity.suggestSource.set(position,"null");
                             playActivity.suggestAdapter = new GridViewSuggestAdapter(playActivity.suggestSource,context,playActivity);
@@ -118,5 +119,36 @@ public class GridViewSuggestAdapter extends BaseAdapter {
             button = (Button)convertView;
         }
         return button;
+
+    }
+
+    public void hint(){
+        System.out.println("hello");
+        System.out.println(Common.user_submit_answer.length);
+        int iter = help.sharedD.iterator;
+        for(int i = iter; i<Common.user_submit_answer.length; i++){
+            System.out.println(i);
+            System.out.println(Common.user_submit_answer);
+            s.valueOf(Common.user_submit_answer[i]);
+            System.out.println((int)Common.user_submit_answer[i]+' ');
+            if(((int)Common.user_submit_answer[i]+' ') == 32){
+                System.out.println("Hello Brat");
+                Common.user_submit_answer[i] = playActivity.answer[i];
+                // upgrade ui
+                GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.user_submit_answer,context);
+                playActivity.gridViewAnswer.setAdapter(answerAdapter);
+                answerAdapter.notifyDataSetChanged();
+
+                String s = ""+playActivity.answer[i];
+                playActivity.suggestSource.remove(s);
+                playActivity.suggestAdapter = new GridViewSuggestAdapter(playActivity.suggestSource,context,playActivity);
+                playActivity.gridViewSuggest.setAdapter(playActivity.suggestAdapter);
+                playActivity.suggestAdapter.notifyDataSetChanged();
+                help.sharedD.iterator++;
+                System.out.println("Iterator changed "+help.sharedD.iterator);
+                ((PlayActivity) context).submit();
+                return;
+            }
+        }
     }
 }

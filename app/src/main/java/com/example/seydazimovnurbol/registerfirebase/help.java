@@ -9,18 +9,19 @@ public class help {
     public static help sharedD = new help();
 
     public int count = 0;
+    public int iterator = 0;
 
 
 
 
 
     public void setHelp(int Help) {
-        System.out.println("set Help");
+        //System.out.println("set Help");
         this.count = Help;
     }
 
     public int getHelp() {
-        System.out.println("get Help");
+        //System.out.println("get Help");
         return count;
     }
 }

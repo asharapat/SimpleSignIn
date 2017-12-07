@@ -56,6 +56,7 @@ public class PlayActivity extends AppCompatActivity {
 
     private Stopwatch timer;
     TextView tryNumber;
+    TextView helpNumber;
     public int numberOfTry;
 
     private ArrayList<Fighter> fighters = new ArrayList<Fighter>();
@@ -69,13 +70,31 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         cnt = 0;
+        help.sharedD.iterator = 0;
 
         timerView = (TextView) findViewById(R.id.timerView);
         tryNumber = (TextView) findViewById(R.id.tryNumber);
         myModel.sharedData.setCount(3);
         int n = myModel.sharedData.getCount();
         tryNumber.setText("Number of life: "+Integer.toString(n));
+        helpNumber = (TextView) findViewById(R.id.help);
+        help.sharedD.setHelp(100);
+        int m = help.sharedD.getHelp();
+        helpNumber.setText("Coins: "+Integer.toString(m) + "$");
 
+        btnSubmit = (Button) findViewById(R.id.btnhelp);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int countNumber = help.sharedD.getHelp();
+                if(countNumber >= 50){
+                    suggestAdapter.hint();
+                    help.sharedD.setHelp(countNumber-50);
+                    helpNumber.setText("Coins: "+Integer.toString(countNumber-50)+ "$");
+                }
+                //System.out.println("HELLOWORLD");
+            }
+        });
 
 
         System.out.println(FirebaseDatabase.getInstance().getReference());
@@ -84,7 +103,7 @@ public class PlayActivity extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        System.out.println("it works.");
+                        //System.out.println("it works.");
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             String name = dsp.getKey();
                             String imageUrl = dsp.getValue().toString();
@@ -129,8 +148,7 @@ public class PlayActivity extends AppCompatActivity {
         setupList();
 
 
-
-            }
+    }
 
 
 
@@ -142,7 +160,14 @@ public class PlayActivity extends AppCompatActivity {
 
         if(result.equals(correct_answer )) {
             Toast.makeText(getApplicationContext(), "Finish! This is " + result, Toast.LENGTH_SHORT).show();
+            help.sharedD.iterator = 0;
 
+            int m = help.sharedD.getHelp();
+            m+=100;
+            help.sharedD.setHelp(m);
+            helpNumber.setText("Coins: "+Integer.toString(m) + "$");
+
+            System.out.println("Iterator initialized "+help.sharedD.iterator);
             // reset
             //Common.count = 0;
             Common.user_submit_answer = new char[correct_answer.length()];
@@ -155,9 +180,9 @@ public class PlayActivity extends AppCompatActivity {
             gridViewSuggest.setAdapter(suggestAdapter);
             suggestAdapter.notifyDataSetChanged();
 
-            System.out.println("cntOfAnsweredQuestions " + cntOfAnsweredQuestions);
-            System.out.println(fighters.size());
-            System.out.println(cntOfAnsweredQuestions);
+//            System.out.println("cntOfAnsweredQuestions " + cntOfAnsweredQuestions);
+//            System.out.println(fighters.size());
+//            System.out.println(cntOfAnsweredQuestions);
 
 
             if (cntOfAnsweredQuestions == (fighters.size() - 1)) {
@@ -167,7 +192,7 @@ public class PlayActivity extends AppCompatActivity {
 
                 myIntent.putExtra("finished_time", resTime);
 
-                System.out.println(resTime);
+                //System.out.println(resTime);
 
                 startActivity(myIntent);
             }
@@ -184,7 +209,7 @@ public class PlayActivity extends AppCompatActivity {
 
 
 
-        System.out.println("random number = " + cnt);
+        //System.out.println("random number = " + cnt);
         if(cnt <= 2) {
             Fighter pickedFighter = fighters.get(cnt);
             Picasso.with(this).load(pickedFighter.getImageUrl()).into(imgViewQuestion);
@@ -194,8 +219,8 @@ public class PlayActivity extends AppCompatActivity {
             correct_answer = pickedFighter.getName();
             answer = correct_answer.toCharArray();
 
-            System.out.println(correct_answer);
-            System.out.println(answer);
+//            System.out.println(correct_answer);
+//            System.out.println(answer);
 
         }
 

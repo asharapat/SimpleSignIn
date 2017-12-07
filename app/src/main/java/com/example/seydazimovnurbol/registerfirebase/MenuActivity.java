@@ -16,7 +16,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonLogout;
     private FirebaseAuth firebaseAuth;
 
-    private TextView textViewUserEmail;
+
 
 
     @Override
@@ -37,9 +37,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
-        textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
 
-        textViewUserEmail.setText("Welcome "+user.getEmail());
 
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
 

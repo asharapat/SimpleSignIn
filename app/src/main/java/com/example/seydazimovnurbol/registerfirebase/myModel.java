@@ -11,12 +11,12 @@ public class myModel {
 
 
     public void setCount(int count) {
-        System.out.println("set Count");
+        //System.out.println("set Count");
         this.count = count;
     }
 
     public int getCount() {
-        System.out.println("get Count");
+        //System.out.println("get Count");
         return count;
     }
 
