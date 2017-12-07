@@ -21,14 +21,22 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="Share"
+        android:background="@drawable/button"
         android:id="@+id/shareButton"
+        android:textColor="#FFE3E3"
+        android:textSize="20sp"
         android:gravity="center"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="start again"
+        android:background="@drawable/button"
+        android:textColor="#FFE3E3"
+        android:textSize="20sp"
         android:id="@+id/startButton"
         android:gravity="center"/>
 

@@ -5,6 +5,7 @@ android:id="@+id/activity_menu"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
+    android:background="@drawable/back"
 android:layout_gravity="center_horizontal"
 tools:context="com.example.seydazimovnurbol.registerfirebase.MenuActivity">
 
@@ -14,7 +15,7 @@ tools:context="com.example.seydazimovnurbol.registerfirebase.MenuActivity">
     android:layout_gravity = "center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_above="@+id/btnSubmit">
+    android:layout_above="@+id/btnhelp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,6 +23,8 @@ tools:context="com.example.seydazimovnurbol.registerfirebase.MenuActivity">
         android:layout_gravity="center"
         android:id="@+id/timerView"
         tools:text="13.5s"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
         android:layout_margin="8dp"/>
 
     <TextView
@@ -29,6 +32,8 @@ tools:context="com.example.seydazimovnurbol.registerfirebase.MenuActivity">
         android:layout_height="wrap_content"
         android:id="@+id/tryNumber"
         android:text="0"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
         android:layout_margin="8dp"/>
 
     <ImageView
@@ -61,13 +66,16 @@ tools:context="com.example.seydazimovnurbol.registerfirebase.MenuActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
 </LinearLayout>
 
     <Button
-        android:id="@+id/btnSubmit"
-        android:text="submit"
+        android:id="@+id/btnhelp"
+        android:text="help"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content" />
+
 
 </RelativeLayout>

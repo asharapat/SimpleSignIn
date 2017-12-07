@@ -38,25 +38,12 @@ public class PlayActivity extends AppCompatActivity {
     public GridViewSuggestAdapter suggestAdapter;
 
     public Button btnSubmit;
+    public Button btnHelp;
 
 
     public GridView gridViewAnswer, gridViewSuggest;
     public ImageView imgViewQuestion;
     static int cnt = 0;
-
-//    int[] image_list = {
-//            R.drawable.bonnar,
-//            R.drawable.condit,
-//            R.drawable.couture,
-//            R.drawable.diaz,
-//            R.drawable.franklin,
-//            R.drawable.griffin,
-//            R.drawable.melendez,
-//            R.drawable.rampage,
-//            R.drawable.rockhold,
-//            R.drawable.shamrock,
-//            R.drawable.shogun
-//    };
 
 
 
@@ -73,10 +60,7 @@ public class PlayActivity extends AppCompatActivity {
 
     private ArrayList<Fighter> fighters = new ArrayList<Fighter>();
 
-//    private void getDataFromFirebase() {
-//
-//
-//    }
+
 
     TextView timerView;
 
@@ -91,6 +75,9 @@ public class PlayActivity extends AppCompatActivity {
         myModel.sharedData.setCount(3);
         int n = myModel.sharedData.getCount();
         tryNumber.setText("Number of life: "+Integer.toString(n));
+
+
+
         System.out.println(FirebaseDatabase.getInstance().getReference());
 
         FirebaseDatabase.getInstance().getReference().child("fighters").addValueEventListener(
@@ -131,14 +118,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        cntOfAnsweredQuestions = 0;
-//        timer = new Stopwatch();
-//        timer.start();
-//        initView();
-//    }
+
 
     private void initView(){
         gridViewAnswer = (GridView) findViewById(R.id.gridViewAnswer);
@@ -148,66 +128,61 @@ public class PlayActivity extends AppCompatActivity {
         // add setupList here
         setupList();
 
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                System.out.println("userSubmitAnswerSize"+Common.user_submit_answer.length);
-
-                String result = "";
-                for(int i = 0; i< Common.user_submit_answer.length; i++){
-                    result+= String.valueOf(Common.user_submit_answer[i]);
-                }
-                if(result.equals(correct_answer )){
-                    Toast.makeText(getApplicationContext(),"Finish! This is "+result,Toast.LENGTH_SHORT).show();
-
-                    // reset
-                    //Common.count = 0;
-                    Common.user_submit_answer = new char[correct_answer.length()];
-                    // Set Adapter
-                    GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(setupNullList(),getApplicationContext());
-                    gridViewAnswer.setAdapter(answerAdapter);
-                    answerAdapter.notifyDataSetChanged();
-
-                    suggestAdapter = new GridViewSuggestAdapter(suggestSource,getApplicationContext(),PlayActivity.this);
-                    gridViewSuggest.setAdapter(suggestAdapter);
-                    suggestAdapter.notifyDataSetChanged();
-
-                    System.out.println("cntOfAnsweredQuestions " + cntOfAnsweredQuestions);
-                    System.out.println(fighters.size());
-                    System.out.println(cntOfAnsweredQuestions);
 
 
-                    if (cntOfAnsweredQuestions == (fighters.size()-1)) {
-
-                        Intent myIntent = new Intent(PlayActivity.this, UserResultActivity.class);
-                        long resTime = timer.getElapsedTime();
-
-                        myIntent.putExtra("finished_time", resTime);
-
-                        System.out.println(resTime);
-
-                        startActivity(myIntent);
-                    }
-                    cntOfAnsweredQuestions++;
-
-                    setupList();
-                }else{
-                    Toast.makeText(PlayActivity.this, "Incorrect!!!",Toast.LENGTH_SHORT).show();
-                }
             }
-        });
+
+
+
+    public void submit(){
+        String result = "";
+        for(int i = 0; i< Common.user_submit_answer.length; i++){
+            result+= String.valueOf(Common.user_submit_answer[i]);
+        }
+
+        if(result.equals(correct_answer )) {
+            Toast.makeText(getApplicationContext(), "Finish! This is " + result, Toast.LENGTH_SHORT).show();
+
+            // reset
+            //Common.count = 0;
+            Common.user_submit_answer = new char[correct_answer.length()];
+            // Set Adapter
+            GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(setupNullList(), getApplicationContext());
+            gridViewAnswer.setAdapter(answerAdapter);
+            answerAdapter.notifyDataSetChanged();
+
+            suggestAdapter = new GridViewSuggestAdapter(suggestSource, getApplicationContext(), PlayActivity.this);
+            gridViewSuggest.setAdapter(suggestAdapter);
+            suggestAdapter.notifyDataSetChanged();
+
+            System.out.println("cntOfAnsweredQuestions " + cntOfAnsweredQuestions);
+            System.out.println(fighters.size());
+            System.out.println(cntOfAnsweredQuestions);
+
+
+            if (cntOfAnsweredQuestions == (fighters.size() - 1)) {
+
+                Intent myIntent = new Intent(PlayActivity.this, UserResultActivity.class);
+                long resTime = timer.getElapsedTime();
+
+                myIntent.putExtra("finished_time", resTime);
+
+                System.out.println(resTime);
+
+                startActivity(myIntent);
+            }
+            cntOfAnsweredQuestions++;
+
+            setupList();
+
+        }
     }
 
     private void setupList() {
         // Random logo
         Random random = new Random();
 
-        // int imageSelected = image_list[random.nextInt(image_list.length)];
-        // imgViewQuestion.setImageResource(imageSelected);
 
-        //int randomNumber = random.nextInt(fighters.size());
 
         System.out.println("random number = " + cnt);
         if(cnt <= 2) {
@@ -255,9 +230,15 @@ public class PlayActivity extends AppCompatActivity {
         int s = myModel.sharedData.getCount();
         if(s == 0){
             Intent myIntent = new Intent(PlayActivity.this, MenuActivity.class);
+            Toast.makeText(PlayActivity.this, "Game Over!!!",Toast.LENGTH_SHORT).show();
             startActivity(myIntent);
+            finish();
         }
         tryNumber.setText("Number of life: "+Integer.toString(s));
+    }
+
+    public void getHelp(){
+
     }
 
 

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bk"
     tools:context="com.example.seydazimovnurbol.registerfirebase.LoginActivity">
 
     <LinearLayout
@@ -22,6 +23,7 @@
             android:textAlignment="center"
             android:text="User Login"
             android:textSize="25dp"
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView"/>
@@ -31,6 +33,7 @@
             android:layout_margin="15dp"
             android:inputType="textEmailAddress"
             android:hint="Enter your email"
+            android:textColor="#000"
             android:id = "@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -40,19 +43,23 @@
             android:inputType="textPassword"
             android:hint="Enter your password"
             android:id = "@+id/editTextPassword"
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
             android:layout_margin="15dp"
             android:id="@+id/buttonSignin"
-            android:text="Register User"
+            android:text="Sign In"
             android:layout_width="match_parent"
+            android:textColor="#000"
+            android:background="@android:color/transparent"
             android:layout_height="wrap_content" />
         <TextView
             android:textAlignment="center"
             android:text="Not have an account? Sign up here"
             android:id="@+id/textViewSignUp"
+            android:textColor="#78201e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

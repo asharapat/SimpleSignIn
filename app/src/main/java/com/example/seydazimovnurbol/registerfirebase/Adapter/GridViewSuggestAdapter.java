@@ -13,6 +13,7 @@ import android.widget.GridView;
 
 import com.example.seydazimovnurbol.registerfirebase.Common.Common;
 import com.example.seydazimovnurbol.registerfirebase.PlayActivity;
+import com.example.seydazimovnurbol.registerfirebase.help;
 import com.example.seydazimovnurbol.registerfirebase.myModel;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class GridViewSuggestAdapter extends BaseAdapter {
     private List<String> suggestSource;
     private Context context;
     private PlayActivity playActivity;
-    public static int count = 3;
+
 
 
     public GridViewSuggestAdapter(List<String> suggestSource, Context context, PlayActivity playActivity) {
@@ -89,14 +90,19 @@ public class GridViewSuggestAdapter extends BaseAdapter {
                             GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.user_submit_answer,context);
                             playActivity.gridViewAnswer.setAdapter(answerAdapter);
                             answerAdapter.notifyDataSetChanged();
-
+                            int count = help.sharedD.getHelp();
+                            help.sharedD.setHelp(++count);
+                            ((PlayActivity) context).getHelp();
                             // Remove from suggest source
                             playActivity.suggestSource.set(position,"null");
                             playActivity.suggestAdapter = new GridViewSuggestAdapter(playActivity.suggestSource,context,playActivity);
                             playActivity.gridViewSuggest.setAdapter(playActivity.suggestAdapter);
                             playActivity.suggestAdapter.notifyDataSetChanged();
+                            ((PlayActivity) context).submit();
+
                         }else{
                             // Remove from suggest source
+                            int count = myModel.sharedData.getCount();
                             myModel.sharedData.setCount(--count);
                             ((PlayActivity) context).getCount();
                             System.out.println(myModel.sharedData.getCount());

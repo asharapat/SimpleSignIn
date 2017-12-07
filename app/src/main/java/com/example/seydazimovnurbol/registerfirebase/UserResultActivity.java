@@ -3,6 +3,7 @@ package com.example.seydazimovnurbol.registerfirebase;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ public class UserResultActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if(v == startAgain){
             finish();
-            startActivity(new Intent(this, PlayActivity.class));
+            startActivity(new Intent(this, MenuActivity.class));
         }
     }
 }
